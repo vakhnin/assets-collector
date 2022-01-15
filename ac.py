@@ -1,4 +1,5 @@
 import glob
+import os
 import pathlib
 
 ASSETSROOTDIRS = [
@@ -7,9 +8,7 @@ ASSETSROOTDIRS = [
 
 
 def parse_folders(path):
-    # for subpath in path.glob("**"):
-    #     print(subpath)
-    for subpath in glob.glob(r'd:\Google Диск\LinePoets\Works\(A-F)\*', recursive=False):
+    for subpath in glob.glob(str(path) + os.sep + "\\*", recursive=False):
         print(subpath)
 
 
