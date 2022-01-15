@@ -15,15 +15,19 @@ def parse_folders(path):
         return True
 
     def is_eps_suffix(file):
-        pass
+        if file.suffix == '.eps':
+            return True
+        return False
 
     files_and_dirs = glob.glob(str(path) + os.sep + "\\*", recursive=False)
     for i in range(len(files_and_dirs)):
         files_and_dirs[i] = pathlib.Path(files_and_dirs[i])
 
     if is_end_dir(files_and_dirs):
-        print(files_and_dirs)
-        exit()
+        for file in files_and_dirs:
+            if is_eps_suffix(file):
+                print(file)
+                exit()
     else:
         for file_or_dir in files_and_dirs:
             if pathlib.Path(file_or_dir).is_dir():
