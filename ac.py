@@ -10,11 +10,16 @@ ASSETSROOTDIRS = [
 def parse_folders(path):
     def is_end_dir(files_and_dirs_list):
         for file_or_dir in files_and_dirs_list:
-            if pathlib.Path(file_or_dir).is_dir():
+            if file_or_dir.is_dir():
                 return False
         return True
 
+    def is_eps_suffix(file):
+        pass
+
     files_and_dirs = glob.glob(str(path) + os.sep + "\\*", recursive=False)
+    for i in range(len(files_and_dirs)):
+        files_and_dirs[i] = pathlib.Path(files_and_dirs[i])
 
     if is_end_dir(files_and_dirs):
         print(files_and_dirs)
