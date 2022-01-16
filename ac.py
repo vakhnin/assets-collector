@@ -54,9 +54,6 @@ def parse_folders(path):
         for file in files_and_dirs:
             if is_eps_suffix(file):
                 eps_list.append(file)
-                image = Image.open(file)
-                # image.show()
-                # exit()
         if len(eps_list) == 0:
             print('Warning: directory does not include .eps files:')
             print(parent_files_and_dirs)
@@ -65,6 +62,10 @@ def parse_folders(path):
             print('Warning: directory includes more than one .eps files:')
             print(parent_files_and_dirs)
             return
+        else:
+            image = Image.open(eps_list[0])
+            image.show()
+            exit()
 
     else:
         for file_or_dir in files_and_dirs:
