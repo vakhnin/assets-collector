@@ -60,6 +60,11 @@ def parse_folders(path):
         if len(eps_list) == 0:
             print('Warning: directory does not include .eps files:')
             print(parent_files_and_dirs)
+            return
+        elif len(eps_list) > 1:
+            print('Warning: directory includes more than one .eps files:')
+            print(parent_files_and_dirs)
+            return
 
     else:
         for file_or_dir in files_and_dirs:
