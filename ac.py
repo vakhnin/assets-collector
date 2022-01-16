@@ -6,6 +6,10 @@ from PIL import Image, EpsImagePlugin
 
 EpsImagePlugin.gs_windows_binary = r'D:\Program Files\gs\gs9.26\bin\gswin64c'
 
+INCLUDEDIRS = [
+    'Shutter'
+]
+
 EXCLUDEDIRS = [
     'sources',
     'Releases',
@@ -36,10 +40,17 @@ def parse_folders(path):
     if is_end_dir(files_and_dirs):
         eps_list = []
         parent_files_and_dirs = files_and_dirs[0].parent.name
+
         for dir in EXCLUDEDIRS:
             if dir.lower() in parent_files_and_dirs.lower():
                 return
-        print(parent_files_and_dirs)
+        for dir in INCLUDEDIRS:
+            if not dir.lower() in parent_files_and_dirs.lower():
+                print('Warning: dir is not in include dirs:')
+                print(parent_files_and_dirs)
+                return
+
+        # print(parent_files_and_dirs)
         for file in files_and_dirs:
             if is_eps_suffix(file):
                 eps_list.append(file)
