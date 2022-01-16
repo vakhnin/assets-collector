@@ -6,6 +6,8 @@ from PIL import Image, EpsImagePlugin
 
 EpsImagePlugin.gs_windows_binary = r'D:\Program Files\gs\gs9.26\bin\gswin64c'
 
+PATHFORSAVE = pathlib.Path('result/')
+
 INCLUDEDIRS = [
     'Shutter'
 ]
@@ -64,7 +66,10 @@ def parse_folders(path):
             return
         else:
             image = Image.open(eps_list[0])
-            image.show()
+
+            if not PATHFORSAVE.is_dir():
+                PATHFORSAVE.mkdir()
+            image.save(PATHFORSAVE / 'test.bmp')
             exit()
 
     else:
