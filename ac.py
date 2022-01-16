@@ -22,6 +22,8 @@ ASSETSROOTDIRS = [
     pathlib.Path(r'd:\Google Диск\LinePoets\Works\(T-Z)'),
 ]
 
+THUMBNAILSIZE = 200, 200
+
 
 def parse_folders(path):
     def is_end_dir(files_and_dirs_list):
@@ -65,11 +67,13 @@ def parse_folders(path):
             print(parent_files_and_dirs)
             return
         else:
-            image = Image.open(eps_list[0])
+            with Image.open(eps_list[0]) as im:
+                im = Image.open(eps_list[0])
+                im.thumbnail(THUMBNAILSIZE)
 
-            if not PATHFORSAVE.is_dir():
-                PATHFORSAVE.mkdir()
-            image.save(PATHFORSAVE / 'test.bmp')
+                if not PATHFORSAVE.is_dir():
+                    PATHFORSAVE.mkdir()
+                im.save(PATHFORSAVE / 'test.jpg', 'JPEG')
             exit()
 
     else:
