@@ -4,6 +4,8 @@ import pathlib
 
 from PIL import Image, EpsImagePlugin
 
+from html import CONTENTHTML, TOPHTML, BOTTOMHTML
+
 EpsImagePlugin.gs_windows_binary = r'D:\Program Files\gs\gs9.26\bin\gswin64c'
 
 PATHFORSAVE = pathlib.Path('result/')
@@ -73,7 +75,11 @@ def parse_folders(path):
 
                 if not PATHFORSAVE.is_dir():
                     PATHFORSAVE.mkdir()
-                im.save(PATHFORSAVE / 'test.jpg', 'JPEG')
+                if not (PATHFORSAVE / 'img').is_dir():
+                    (PATHFORSAVE / 'img').mkdir()
+                im.save(PATHFORSAVE / 'img' / 'test.jpg', 'JPEG')
+            with PATHFORSAVE / 'ac.html' as file:
+                file.write_text(TOPHTML + CONTENTHTML + BOTTOMHTML)
             exit()
 
     else:
