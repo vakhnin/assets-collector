@@ -4,7 +4,7 @@ from ac import EXCLUDEDIRS, INCLUDEDIRS, THUMBNAILSIZE, PATHFORSAVE
 from html import CONTENTHTML, TOPHTML, BOTTOMHTML
 
 
-class BaseCaseMainRecursive():
+class BaseCaseMainRecursive:
     def __init__(self, files):
         self.files = files
 
@@ -35,9 +35,9 @@ class BaseCaseMainRecursive():
                 return False
             return True
 
-    def base_case(eps_list):
-        with Image.open(eps_list[0]) as im:
-            im = Image.open(eps_list[0])
+    def base_case(self, eps_file):
+        with Image.open(eps_file) as im:
+            im = Image.open(eps_file)
             im.thumbnail(THUMBNAILSIZE)
 
             if not PATHFORSAVE.is_dir():
@@ -45,11 +45,12 @@ class BaseCaseMainRecursive():
             if not (PATHFORSAVE / 'img').is_dir():
                 (PATHFORSAVE / 'img').mkdir()
             im.save(PATHFORSAVE / 'img' / 'test.jpg', 'JPEG')
+
         with PATHFORSAVE / 'ac.html' as file:
             file.write_text(TOPHTML + CONTENTHTML + BOTTOMHTML)
         exit()
 
-    def is_eps_suffix(file):
+    def is_eps_suffix(self, file):
         if file.suffix == '.eps':
             return True
         return False
