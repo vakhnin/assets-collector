@@ -1,7 +1,7 @@
 from PIL import Image
 
-from ac import EXCLUDEDIRS, INCLUDEDIRS, THUMBNAILSIZE, PATHFORSAVE
-from html import CONTENTHTML, TOPHTML, BOTTOMHTML
+from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
+from settings.settings import EXCLUDEDIRS, INCLUDEDIRS, THUMBNAILSIZE, PATHFORSAVE
 
 
 class BaseCaseMainRecursive:
