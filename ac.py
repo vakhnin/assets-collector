@@ -4,27 +4,10 @@ import pathlib
 
 from PIL import EpsImagePlugin
 
-import base_case_main_recursive.base_case_main_recursive as base_case_main_recursive
+from base_case_main_recursive.base_case import BaseCaseMainRecursive
+from settings.settings import ASSETSROOTDIRS
 
 EpsImagePlugin.gs_windows_binary = r'D:\Program Files\gs\gs9.26\bin\gswin64c'
-
-PATHFORSAVE = pathlib.Path('result/')
-
-INCLUDEDIRS = [
-    'Shutter'
-]
-
-EXCLUDEDIRS = [
-    'sources',
-    'Releases',
-    'iStock',
-]
-
-ASSETSROOTDIRS = [
-    pathlib.Path(r'd:\Google Диск\LinePoets\Works\(T-Z)'),
-]
-
-THUMBNAILSIZE = 200, 200
 
 
 def parse_folders(path):
@@ -39,7 +22,7 @@ def parse_folders(path):
         files_and_dirs[i] = pathlib.Path(files_and_dirs[i])
 
     if is_end_dir(files_and_dirs):
-        base_case = base_case_main_recursive.BaseCaseMainRecursive(files_and_dirs)
+        base_case = BaseCaseMainRecursive(files_and_dirs)
         print(base_case)
     else:
         for file_or_dir in files_and_dirs:
