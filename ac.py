@@ -4,7 +4,11 @@ import pathlib
 
 from PIL import Image, EpsImagePlugin
 
+from html import CONTENTHTML, TOPHTML, BOTTOMHTML
+
 EpsImagePlugin.gs_windows_binary = r'D:\Program Files\gs\gs9.26\bin\gswin64c'
+
+PATHFORSAVE = pathlib.Path('result/')
 
 INCLUDEDIRS = [
     'Shutter'
@@ -19,6 +23,8 @@ EXCLUDEDIRS = [
 ASSETSROOTDIRS = [
     pathlib.Path(r'd:\Google Диск\LinePoets\Works\(T-Z)'),
 ]
+
+THUMBNAILSIZE = 200, 200
 
 
 def parse_folders(path):
@@ -54,12 +60,27 @@ def parse_folders(path):
         for file in files_and_dirs:
             if is_eps_suffix(file):
                 eps_list.append(file)
-                image = Image.open(file)
-                # image.show()
-                # exit()
         if len(eps_list) == 0:
             print('Warning: directory does not include .eps files:')
             print(parent_files_and_dirs)
+            return
+        elif len(eps_list) > 1:
+            print('Warning: directory includes more than one .eps files:')
+            print(parent_files_and_dirs)
+            return
+        else:
+            with Image.open(eps_list[0]) as im:
+                im = Image.open(eps_list[0])
+                im.thumbnail(THUMBNAILSIZE)
+
+                if not PATHFORSAVE.is_dir():
+                    PATHFORSAVE.mkdir()
+                if not (PATHFORSAVE / 'img').is_dir():
+                    (PATHFORSAVE / 'img').mkdir()
+                im.save(PATHFORSAVE / 'img' / 'test.jpg', 'JPEG')
+            with PATHFORSAVE / 'ac.html' as file:
+                file.write_text(TOPHTML + CONTENTHTML + BOTTOMHTML)
+            exit()
 
     else:
         for file_or_dir in files_and_dirs:
