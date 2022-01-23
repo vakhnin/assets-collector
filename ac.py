@@ -25,7 +25,7 @@ def parse_folders(path):
         base_case = BaseCaseMainRecursive(files_and_dirs)
         eps_file = base_case.check(base_case.files)
         if eps_file:
-            print(eps_file)
+            base_case.base_case(eps_file)
             exit()
     else:
         for file_or_dir in files_and_dirs:
