@@ -33,7 +33,7 @@ class BaseCaseMainRecursive:
                 print('Warning: directory includes more than one .eps files:')
                 print(parent_files_and_dirs)
                 return False
-            return True
+            return eps_list[0]
 
     def base_case(self, eps_file):
         with Image.open(eps_file) as im:
