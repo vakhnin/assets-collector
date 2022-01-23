@@ -23,7 +23,10 @@ def parse_folders(path):
 
     if is_end_dir(files_and_dirs):
         base_case = BaseCaseMainRecursive(files_and_dirs)
-        print(base_case)
+        eps_file = base_case.check(base_case.files)
+        if eps_file:
+            print(eps_file)
+            exit()
     else:
         for file_or_dir in files_and_dirs:
             if pathlib.Path(file_or_dir).is_dir():
