@@ -9,15 +9,25 @@ TOPHTML = '''
     <link rel="stylesheet" href="../html/ac.css">
     <title>Document</title>
 </head>
-<body>
+<body>    
+
+    <table>
 
 '''
 
 CONTENTHTML = '''
-    <h1>header1</h1>
+        <tr>
+            <td>
+                <div class="jpg">
+                    <img src="img/{}.jpg" alt="">
+                </div>
+            </td>
+            <td>{}</td>
+        </tr>
 '''
 
 BOTTOMHTML = '''
+    </table>
 
 </body>
 </html>

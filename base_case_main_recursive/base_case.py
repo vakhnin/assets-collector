@@ -55,7 +55,9 @@ class BaseCaseMainRecursive:
             im.save(PATHFORSAVE / 'img' / (eps_file.stem + '.jpg'), 'JPEG')
 
         with PATHFORSAVE / 'ac.html' as file:
-            file.write_text(TOPHTML + CONTENTHTML + BOTTOMHTML)
+            file.write_text(TOPHTML
+                            + CONTENTHTML.format(eps_file.stem, eps_file.stem)
+                            + BOTTOMHTML)
         exit()
 
     def is_eps_suffix(self, file):
