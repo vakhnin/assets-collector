@@ -44,7 +44,11 @@ class BaseCaseMainRecursive:
                 PATHFORSAVE.mkdir()
             if not (PATHFORSAVE / 'img').is_dir():
                 (PATHFORSAVE / 'img').mkdir()
-            im.save(PATHFORSAVE / 'img' / 'test.jpg', 'JPEG')
+            if (PATHFORSAVE / 'img' / eps_file.name).exists():
+                print('Error: more then one name .eps files:')
+                print(PATHFORSAVE / 'img' / eps_file.name)
+                return
+            im.save(PATHFORSAVE / 'img' / eps_file.name, 'JPEG')
 
         with PATHFORSAVE / 'ac.html' as file:
             file.write_text(TOPHTML + CONTENTHTML + BOTTOMHTML)
