@@ -13,11 +13,11 @@ class BaseCaseMainRecursive:
     def check(self, files):
         parent_files_and_dirs = files[0].parent.name
 
-        for dir in EXCLUDEDIRS:
-            if dir.lower() in parent_files_and_dirs.lower():
+        for dir_ in EXCLUDEDIRS:
+            if dir_.lower() in parent_files_and_dirs.lower():
                 return False
-        for dir in INCLUDEDIRS:
-            if not dir.lower() in parent_files_and_dirs.lower():
+        for dir_ in INCLUDEDIRS:
+            if not dir_.lower() in parent_files_and_dirs.lower():
                 print('Warning: dir is not in include dirs:')
                 print(parent_files_and_dirs)
                 return False
@@ -40,7 +40,7 @@ class BaseCaseMainRecursive:
     def base_case(self, eps_file):
         if PATHFORSAVE.exists():
             shutil.rmtree(PATHFORSAVE)
-            return
+
         with Image.open(eps_file) as im:
             im = Image.open(eps_file)
             im.thumbnail(THUMBNAILSIZE)
