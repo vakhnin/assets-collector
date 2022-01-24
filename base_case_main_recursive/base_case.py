@@ -1,3 +1,5 @@
+import shutil
+
 from PIL import Image
 
 from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
@@ -11,11 +13,11 @@ class BaseCaseMainRecursive:
     def check(self, files):
         parent_files_and_dirs = files[0].parent.name
 
-        for dir in EXCLUDEDIRS:
-            if dir.lower() in parent_files_and_dirs.lower():
+        for dir_ in EXCLUDEDIRS:
+            if dir_.lower() in parent_files_and_dirs.lower():
                 return False
-        for dir in INCLUDEDIRS:
-            if not dir.lower() in parent_files_and_dirs.lower():
+        for dir_ in INCLUDEDIRS:
+            if not dir_.lower() in parent_files_and_dirs.lower():
                 print('Warning: dir is not in include dirs:')
                 print(parent_files_and_dirs)
                 return False
@@ -36,8 +38,10 @@ class BaseCaseMainRecursive:
             return eps_list[0]
 
     def base_case(self, eps_file):
+        if PATHFORSAVE.exists():
+            shutil.rmtree(PATHFORSAVE)
+
         with Image.open(eps_file) as im:
-            im = Image.open(eps_file)
             im.thumbnail(THUMBNAILSIZE)
 
             if not PATHFORSAVE.is_dir():
@@ -48,10 +52,12 @@ class BaseCaseMainRecursive:
                 print('Error: more then one name .eps files:')
                 print(PATHFORSAVE / 'img' / eps_file.name)
                 return
-            im.save(PATHFORSAVE / 'img' / eps_file.name, 'JPEG')
+            im.save(PATHFORSAVE / 'img' / (eps_file.stem + '.jpg'), 'JPEG')
 
         with PATHFORSAVE / 'ac.html' as file:
-            file.write_text(TOPHTML + CONTENTHTML + BOTTOMHTML)
+            file.write_text(TOPHTML
+                            + CONTENTHTML.format(eps_file.stem, eps_file.stem)
+                            + BOTTOMHTML)
         exit()
 
     def is_eps_suffix(self, file):
