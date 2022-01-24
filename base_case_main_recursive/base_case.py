@@ -42,7 +42,6 @@ class BaseCaseMainRecursive:
             shutil.rmtree(PATHFORSAVE)
 
         with Image.open(eps_file) as im:
-            im = Image.open(eps_file)
             im.thumbnail(THUMBNAILSIZE)
 
             if not PATHFORSAVE.is_dir():
@@ -53,7 +52,7 @@ class BaseCaseMainRecursive:
                 print('Error: more then one name .eps files:')
                 print(PATHFORSAVE / 'img' / eps_file.name)
                 return
-            im.save(PATHFORSAVE / 'img' / eps_file.name, 'JPEG')
+            im.save(PATHFORSAVE / 'img' / (eps_file.stem + '.jpg'), 'JPEG')
 
         with PATHFORSAVE / 'ac.html' as file:
             file.write_text(TOPHTML + CONTENTHTML + BOTTOMHTML)
