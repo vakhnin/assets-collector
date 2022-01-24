@@ -1,3 +1,5 @@
+import shutil
+
 from PIL import Image
 
 from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
@@ -36,6 +38,9 @@ class BaseCaseMainRecursive:
             return eps_list[0]
 
     def base_case(self, eps_file):
+        if PATHFORSAVE.exists():
+            shutil.rmtree(PATHFORSAVE)
+            return
         with Image.open(eps_file) as im:
             im = Image.open(eps_file)
             im.thumbnail(THUMBNAILSIZE)
