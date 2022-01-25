@@ -5,29 +5,20 @@ from PIL import Image
 from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
 from settings.settings import THUMBNAILSIZE, PATHFORSAVE
 
+main_list = []
+
 
 class EpsObj:
     def __init__(self, file):
         self._file = file
         self.name = file.stem
         self.create_timestamp = file.stat().st_ctime
-        self.create_date = datetime\
+        self.create_date = datetime \
             .utcfromtimestamp(self.create_timestamp).strftime('%Y-%m-%d')
-        print(self)
-
-        self.make_html()
         self.make_thumbnail()
-
-        exit()
 
     def __str__(self):
         return str(f'{self.name} {self.create_date} {self._file}')
-
-    def make_html(self):
-        with PATHFORSAVE / 'ac.html' as file:
-            file.write_text(TOPHTML
-                            + CONTENTHTML.format(self.name, self.name)
-                            + BOTTOMHTML)
 
     def make_thumbnail(self):
         with Image.open(self._file) as im:
@@ -41,3 +32,12 @@ class EpsObj:
                 return
 
             im.save(PATHFORSAVE / 'img' / (self.name + '.jpg'), 'JPEG')
+
+
+def make_html(obj_list):
+    with PATHFORSAVE / 'ac.html' as file:
+        content = TOPHTML
+        for obj in obj_list:
+            content+= CONTENTHTML.format(obj.name, obj.name)
+        content += BOTTOMHTML
+        file.write_text(content)

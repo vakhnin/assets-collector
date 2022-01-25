@@ -1,7 +1,5 @@
-import shutil
-
-from eps_obj_list.eps_obj_list import EpsObj
-from settings.settings import EXCLUDEDIRS, INCLUDEDIRS, PATHFORSAVE
+from eps_obj_list.eps_obj_list import EpsObj, main_list
+from settings.settings import EXCLUDEDIRS, INCLUDEDIRS
 
 
 class BaseCaseMainRecursive:
@@ -36,13 +34,9 @@ class BaseCaseMainRecursive:
             return eps_list[0]
 
     def base_case(self, eps_file):
-        if PATHFORSAVE.exists():
-            shutil.rmtree(PATHFORSAVE)
-
-        if not PATHFORSAVE.is_dir():
-            PATHFORSAVE.mkdir()
-
+        print('.', end='')
         eps_obj = EpsObj(eps_file)
+        main_list.append(eps_obj)
 
     def is_eps_suffix(self, file):
         if file.suffix == '.eps':
