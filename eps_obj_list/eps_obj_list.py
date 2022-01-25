@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from PIL import Image
 
 from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
@@ -8,6 +10,9 @@ class EpsObj:
     def __init__(self, file):
         self._file = file
         self.name = file.stem
+        self.create_timestamp = file.stat().st_ctime
+        self.create_date = datetime\
+            .utcfromtimestamp(self.create_timestamp).strftime('%Y-%m-%d')
         print(self)
 
         self.make_html()
@@ -16,7 +21,7 @@ class EpsObj:
         exit()
 
     def __str__(self):
-        return str(f'{self.name} {self._file}')
+        return str(f'{self.name} {self.create_date} {self._file}')
 
     def make_html(self):
         with PATHFORSAVE / 'ac.html' as file:
@@ -36,4 +41,3 @@ class EpsObj:
                 return
 
             im.save(PATHFORSAVE / 'img' / (self.name + '.jpg'), 'JPEG')
-
