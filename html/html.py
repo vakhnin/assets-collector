@@ -1,5 +1,4 @@
-TOPHTML = '''
-<!doctype html>
+TOPHTML = '''<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,16 +11,24 @@ TOPHTML = '''
 <body>    
 
     <table>
+        <tr>
+            <th>№</th>
+            <th>Thumbnail</th>
+            <th>Name</th>
+            <th>Date</th>
+        </tr>
 
 '''
 
 CONTENTHTML = '''
-        <tr>
+        <tr{}>
+            <td>{}</td>
             <td>
                 <div class="jpg">
                     <img src="img/{}.jpg" alt="">
                 </div>
             </td>
+            <td>{}</td>
             <td>{}</td>
         </tr>
 '''
