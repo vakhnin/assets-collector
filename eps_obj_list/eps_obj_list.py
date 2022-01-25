@@ -12,7 +12,7 @@ class EpsObj:
     def __init__(self, file):
         self._file = file
         self.name = file.stem
-        self.create_timestamp = file.stat().st_ctime
+        self.create_timestamp = file.stat().st_mtime
         self.create_date = datetime \
             .utcfromtimestamp(self.create_timestamp).strftime('%Y-%m-%d')
         self.make_thumbnail()
@@ -36,8 +36,14 @@ class EpsObj:
 
 def make_html(obj_list):
     with PATHFORSAVE / 'ac.html' as file:
+        i = 0
         content = TOPHTML
         for obj in obj_list:
-            content+= CONTENTHTML.format(obj.name, obj.name)
+            grey_row = ''
+            if i % 2:
+                grey_row = ' class="grey-row"'
+            i += 1
+            content += str(CONTENTHTML.
+                           format(grey_row, i, obj.name, obj.name, obj.create_date, obj._file))
         content += BOTTOMHTML
-        file.write_text(content)
+        file.write_text(content, encoding='utf-8')
