@@ -12,7 +12,7 @@ class EpsObj:
     def __init__(self, file):
         self._file = file
         self.name = file.stem
-        self.create_timestamp = file.stat().st_ctime
+        self.create_timestamp = file.stat().st_mtime
         self.create_date = datetime \
             .utcfromtimestamp(self.create_timestamp).strftime('%Y-%m-%d')
         self.make_thumbnail()
@@ -44,6 +44,6 @@ def make_html(obj_list):
                 grey_row = ' class="grey-row"'
             i += 1
             content += str(CONTENTHTML.
-                           format(grey_row, i, obj.name, obj.name, obj.create_date))
+                           format(grey_row, i, obj.name, obj.name, obj.create_date, obj._file))
         content += BOTTOMHTML
         file.write_text(content, encoding='utf-8')

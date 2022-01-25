@@ -16,6 +16,7 @@ TOPHTML = '''<!doctype html>
             <th>Thumbnail</th>
             <th>Name</th>
             <th>Date</th>
+            <th>Full path</th>
         </tr>
 
 '''
@@ -28,6 +29,7 @@ CONTENTHTML = '''
                     <img src="img/{}.jpg" alt="">
                 </div>
             </td>
+            <td>{}</td>
             <td>{}</td>
             <td>{}</td>
         </tr>
