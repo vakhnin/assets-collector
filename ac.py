@@ -1,11 +1,13 @@
 import glob
 import os
 import pathlib
+import shutil
 
 from PIL import EpsImagePlugin
 
 from base_case_main_recursive.base_case import BaseCaseMainRecursive
-from settings.settings import ASSETSROOTDIRS
+from eps_obj_list.eps_obj_list import main_list, make_html
+from settings.settings import ASSETSROOTDIRS, PATHFORSAVE
 
 EpsImagePlugin.gs_windows_binary = r'D:\Program Files\gs\gs9.26\bin\gswin64c'
 
@@ -26,12 +28,20 @@ def parse_folders(path):
         eps_file = base_case.check(base_case.files)
         if eps_file:
             base_case.base_case(eps_file)
-            exit()
     else:
         for file_or_dir in files_and_dirs:
             if pathlib.Path(file_or_dir).is_dir():
                 parse_folders(file_or_dir)
 
 
+if PATHFORSAVE.exists():
+    shutil.rmtree(PATHFORSAVE)
+
+if not PATHFORSAVE.is_dir():
+    PATHFORSAVE.mkdir()
+
 for root_dir in ASSETSROOTDIRS:
     parse_folders(root_dir)
+
+
+make_html(main_list)

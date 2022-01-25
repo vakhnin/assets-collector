@@ -1,10 +1,5 @@
-import shutil
-
-from PIL import Image
-
-from eps_obj_list.eps_obj_list import EpsObj
-from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
-from settings.settings import EXCLUDEDIRS, INCLUDEDIRS, THUMBNAILSIZE, PATHFORSAVE
+from eps_obj_list.eps_obj_list import EpsObj, main_list
+from settings.settings import EXCLUDEDIRS, INCLUDEDIRS
 
 
 class BaseCaseMainRecursive:
@@ -39,29 +34,9 @@ class BaseCaseMainRecursive:
             return eps_list[0]
 
     def base_case(self, eps_file):
-        if PATHFORSAVE.exists():
-            shutil.rmtree(PATHFORSAVE)
-
+        print('.', end='')
         eps_obj = EpsObj(eps_file)
-
-        with Image.open(eps_file) as im:
-            im.thumbnail(THUMBNAILSIZE)
-
-            if not PATHFORSAVE.is_dir():
-                PATHFORSAVE.mkdir()
-            if not (PATHFORSAVE / 'img').is_dir():
-                (PATHFORSAVE / 'img').mkdir()
-            if (PATHFORSAVE / 'img' / eps_file.name).exists():
-                print('Error: more then one name .eps files:')
-                print(PATHFORSAVE / 'img' / eps_file.name)
-                return
-            im.save(PATHFORSAVE / 'img' / (eps_file.stem + '.jpg'), 'JPEG')
-
-        with PATHFORSAVE / 'ac.html' as file:
-            file.write_text(TOPHTML
-                            + CONTENTHTML.format(eps_file.stem, eps_file.stem)
-                            + BOTTOMHTML)
-        exit()
+        main_list.append(eps_obj)
 
     def is_eps_suffix(self, file):
         if file.suffix == '.eps':
