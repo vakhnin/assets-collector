@@ -10,7 +10,7 @@ main_list = []
 
 class EpsObj:
     def __init__(self, file):
-        self._file = file
+        self.file = file
         self.name = file.stem
         self.create_timestamp = file.stat().st_mtime
         self.create_date = datetime \
@@ -18,33 +18,46 @@ class EpsObj:
         self.make_thumbnail()
 
     def __str__(self):
-        return str(f'{self.name} {self.create_date} {self._file}')
+        return str(f'{self.name} {self.create_date} {self.file}')
 
     def make_thumbnail(self):
-        with Image.open(self._file) as im:
+        with Image.open(self.file) as im:
             im.thumbnail(THUMBNAILSIZE)
 
             if not (PATHFORSAVE / 'img').is_dir():
                 (PATHFORSAVE / 'img').mkdir()
-            if (PATHFORSAVE / 'img' / self._file.name).exists():
+            if (PATHFORSAVE / 'img' / self.file.name).exists():
                 print('Error: more then one name .eps files:')
-                print(PATHFORSAVE / 'img' / self._file.name)
+                print(PATHFORSAVE / 'img' / self.file.name)
                 return
 
             im.save(PATHFORSAVE / 'img' / (self.name + '.jpg'), 'JPEG')
 
 
 def make_html(obj_list):
+    names_list = []
     obj_list = sorted(obj_list, key=lambda x: x.create_date)
+
     with PATHFORSAVE / 'ac.html' as file:
         i = 0
         content = TOPHTML
         for obj in obj_list:
-            grey_row = ''
+            color_row = ''
             if i % 2:
-                grey_row = ' class="grey-row"'
+                color_row = ' class="grey-row"'
             i += 1
+
+            double = ''
+            if obj.name in names_list:
+                print('Warning: More then one name:')
+                print(obj.file)
+                color_row = ' class="green-row"'
+                double = ' (double)'
+            names_list.append(obj.name)
+
             content += str(CONTENTHTML.
-                           format(grey_row, i, obj.name, obj.name, obj.create_date, obj._file))
+                           format(color_row, i, obj.name,
+                                  obj.name + double, obj.create_date, obj.file))
+
         content += BOTTOMHTML
         file.write_text(content, encoding='utf-8')
