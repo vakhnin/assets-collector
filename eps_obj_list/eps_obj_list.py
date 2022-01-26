@@ -49,7 +49,7 @@ def make_html(obj_list):
 
             double = ''
             if obj.name in names_list:
-                print('Warning: More then one name:')
+                print('\nWarning: More then one name:')
                 print(obj.file)
                 color_row = ' class="green-row"'
                 double = ' (double)'

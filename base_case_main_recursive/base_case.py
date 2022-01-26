@@ -7,6 +7,7 @@ class BaseCaseMainRecursive:
         self.files = files
 
     def check(self, files):
+        file = files[0]
         parent_files_and_dirs = files[0].parent.name
 
         for dir_ in EXCLUDEDIRS:
@@ -14,8 +15,8 @@ class BaseCaseMainRecursive:
                 return False
         for dir_ in INCLUDEDIRS:
             if not dir_.lower() in parent_files_and_dirs.lower():
-                print('Warning: dir is not in include dirs:')
-                print(parent_files_and_dirs)
+                print('\nWarning: dir is not in include dirs:')
+                print(file)
                 return False
 
             eps_list = []
@@ -24,12 +25,12 @@ class BaseCaseMainRecursive:
                 if self.is_eps_suffix(file):
                     eps_list.append(file)
             if len(eps_list) == 0:
-                print('Warning: directory does not include .eps files:')
-                print(parent_files_and_dirs)
+                print('\nWarning: directory does not include .eps files:')
+                print(file)
                 return False
             elif len(eps_list) > 1:
-                print('Warning: directory includes more than one .eps files:')
-                print(parent_files_and_dirs)
+                print('\nWarning: directory includes more than one .eps files:')
+                print(file)
                 return False
             return eps_list[0]
 
