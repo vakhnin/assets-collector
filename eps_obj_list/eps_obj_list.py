@@ -1,9 +1,10 @@
+import shutil
 from datetime import datetime
 
 from PIL import Image
 
 from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
-from settings.settings import THUMBNAILSIZE, PATHFORSAVE
+from settings.settings import THUMBNAILSIZE, PATHFORSAVE, FAVICON_PATH
 
 main_list = []
 
@@ -37,6 +38,8 @@ class EpsObj:
 def make_html(obj_list):
     names_list = []
     obj_list = sorted(obj_list, key=lambda x: x.create_date)
+
+    shutil.copy(FAVICON_PATH, PATHFORSAVE / 'favicon.ico')
 
     with PATHFORSAVE / 'ac.html' as file:
         i = 0
