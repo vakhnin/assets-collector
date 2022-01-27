@@ -21,6 +21,8 @@ ASSETSROOTDIRS = [
     pathlib.Path(r'd:\Google Диск\LinePoets\Works\(T-Z)'),
 ]
 
+STYLE_PATH = pathlib.Path.cwd() / 'html' / 'ac.css'
+
 FAVICON_PATH = pathlib.Path.cwd() / 'html' / 'img' / 'favicon.ico'
 
 THUMBNAILSIZE = 200, 200

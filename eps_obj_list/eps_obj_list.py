@@ -1,12 +1,11 @@
 import base64
 import io
-import shutil
 from datetime import datetime
 
 from PIL import Image
 
 from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
-from settings.settings import THUMBNAILSIZE, PATHFORSAVE, FAVICON_PATH
+from settings.settings import THUMBNAILSIZE, PATHFORSAVE, FAVICON_PATH, STYLE_PATH
 
 main_list = []
 thumbnail_dict = {}
@@ -39,6 +38,9 @@ def make_html(obj_list):
     names_list = []
     obj_list = sorted(obj_list, key=lambda x: x.create_date)
 
+    with STYLE_PATH as style_path:
+        style = style_path.read_text()
+
     with Image.open(FAVICON_PATH) as favicon:
         img_byte_arr = io.BytesIO()
         favicon.save(img_byte_arr, format='ICO')
@@ -48,7 +50,7 @@ def make_html(obj_list):
 
     with PATHFORSAVE / 'ac.html' as file:
         i = 0
-        content = TOPHTML.format(favicon_base64)
+        content = TOPHTML.format(style, favicon_base64)
         for obj in obj_list:
             color_row = ''
             if i % 2:
