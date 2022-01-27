@@ -29,7 +29,7 @@ CONTENTHTML = '''
             <td><div>{}</div></td>
             <td>
                 <div class="jpg">
-                    <img src="img/{}.jpg" alt="">
+                    <img src="data:image/gif;base64,{}" alt="">
                 </div>
             </td>
             <td><div>{}</div></td>
