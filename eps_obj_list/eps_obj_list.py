@@ -4,8 +4,8 @@ from datetime import datetime
 
 from PIL import Image
 
-from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
-from settings.settings import THUMBNAILSIZE, PATHFORSAVE, FAVICON_PATH, STYLE_PATH
+from html.html import CONTENT_HTML, TOP_HTML, BOTTOM_HTML
+from settings.settings import THUMBNAIL_SIZE, PATH_FOR_SAVE, FAVICON_PATH, STYLE_PATH
 
 main_list = []
 thumbnail_dict = {}
@@ -25,7 +25,7 @@ class EpsObj:
 
     def make_thumbnail(self):
         with Image.open(self.file) as im:
-            im.thumbnail(THUMBNAILSIZE)
+            im.thumbnail(THUMBNAIL_SIZE)
 
             img_byte_arr = io.BytesIO()
             im.save(img_byte_arr, format='JPEG')
@@ -48,9 +48,9 @@ def make_html(obj_list):
 
         favicon_base64 = base64.b64encode(img_byte_arr).decode('ascii')
 
-    with PATHFORSAVE / 'ac.html' as file:
+    with PATH_FOR_SAVE / 'ac.html' as file:
         i = 0
-        content = TOPHTML.format(style, favicon_base64)
+        content = TOP_HTML.format(style, favicon_base64)
         for obj in obj_list:
             color_row = ''
             if i % 2:
@@ -65,9 +65,9 @@ def make_html(obj_list):
                 double = ' (double)'
             names_list.append(obj.name)
 
-            content += str(CONTENTHTML.
+            content += str(CONTENT_HTML.
                            format(color_row, i, thumbnail_dict[obj.name],
                                   obj.name + double, obj.create_date, obj.file))
 
-        content += BOTTOMHTML
+        content += BOTTOM_HTML
         file.write_text(content, encoding='utf-8')

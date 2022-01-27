@@ -1,4 +1,4 @@
-TOPHTML = '''<!doctype html>
+TOP_HTML = '''<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@ TOPHTML = '''<!doctype html>
 
 '''
 
-CONTENTHTML = '''
+CONTENT_HTML = '''
         <tr{}>
             <td><div>{}</div></td>
             <td>
@@ -40,7 +40,7 @@ CONTENTHTML = '''
         </tr>
 '''
 
-BOTTOMHTML = '''
+BOTTOM_HTML = '''
     </table>
 
 </body>

@@ -1,12 +1,12 @@
 import pathlib
 
-PATHFORSAVE = pathlib.Path('result/')
+PATH_FOR_SAVE = pathlib.Path('result/')
 
-INCLUDEDIRS = [
+INCLUDE_DIRS = [
     'Shutter'
 ]
 
-EXCLUDEDIRS = [
+EXCLUDE_DIRS = [
     'source',
     'Release',
     'iStock',
@@ -14,7 +14,7 @@ EXCLUDEDIRS = [
     '(other)',
 ]
 
-ASSETSROOTDIRS = [
+ASSETS_ROOT_DIRS = [
     # pathlib.Path(r'd:\Google Диск\LinePoets\Works\(A-F)'),
     # pathlib.Path(r'd:\Google Диск\LinePoets\Works\(G-M)'),
     # pathlib.Path(r'd:\Google Диск\LinePoets\Works\(O-S)'),
@@ -25,4 +25,4 @@ STYLE_PATH = pathlib.Path.cwd() / 'html' / 'ac.css'
 
 FAVICON_PATH = pathlib.Path.cwd() / 'html' / 'img' / 'favicon.ico'
 
-THUMBNAILSIZE = 200, 200
+THUMBNAIL_SIZE = 200, 200
