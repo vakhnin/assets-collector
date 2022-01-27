@@ -1,3 +1,5 @@
+import base64
+import io
 import shutil
 from datetime import datetime
 
@@ -7,6 +9,7 @@ from html.html import CONTENTHTML, TOPHTML, BOTTOMHTML
 from settings.settings import THUMBNAILSIZE, PATHFORSAVE, FAVICON_PATH
 
 main_list = []
+thumbnail_dict = {}
 
 
 class EpsObj:
@@ -25,14 +28,11 @@ class EpsObj:
         with Image.open(self.file) as im:
             im.thumbnail(THUMBNAILSIZE)
 
-            if not (PATHFORSAVE / 'img').is_dir():
-                (PATHFORSAVE / 'img').mkdir()
-            if (PATHFORSAVE / 'img' / self.file.name).exists():
-                print('Error: more then one name .eps files:')
-                print(PATHFORSAVE / 'img' / self.file.name)
-                return
+            img_byte_arr = io.BytesIO()
+            im.save(img_byte_arr, format='GIF')
+            img_byte_arr = img_byte_arr.getvalue()
 
-            im.save(PATHFORSAVE / 'img' / (self.name + '.jpg'), 'JPEG')
+            thumbnail_dict[self.name] = base64.b64encode(img_byte_arr).decode('ascii')
 
 
 def make_html(obj_list):
@@ -59,7 +59,7 @@ def make_html(obj_list):
             names_list.append(obj.name)
 
             content += str(CONTENTHTML.
-                           format(color_row, i, obj.name,
+                           format(color_row, i, thumbnail_dict[obj.name],
                                   obj.name + double, obj.create_date, obj.file))
 
         content += BOTTOMHTML
