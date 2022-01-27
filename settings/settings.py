@@ -2,6 +2,8 @@ import pathlib
 
 PATH_FOR_SAVE = pathlib.Path('result/')
 
+COLLECTOR_PROFILE = 'Shutter'
+
 INCLUDE_DIRS = [
     'Shutter'
 ]

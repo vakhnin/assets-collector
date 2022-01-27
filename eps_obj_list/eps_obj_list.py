@@ -5,7 +5,7 @@ from datetime import datetime
 from PIL import Image
 
 from html.html import CONTENT_HTML, TOP_HTML, BOTTOM_HTML
-from settings.settings import THUMBNAIL_SIZE, PATH_FOR_SAVE, FAVICON_PATH, STYLE_PATH
+from settings.settings import THUMBNAIL_SIZE, PATH_FOR_SAVE, FAVICON_PATH, STYLE_PATH, COLLECTOR_PROFILE
 
 main_list = []
 thumbnail_dict = {}
@@ -50,7 +50,8 @@ def make_html(obj_list):
 
     with PATH_FOR_SAVE / 'ac.html' as file:
         i = 0
-        content = TOP_HTML.format(style, favicon_base64)
+        content = TOP_HTML.format(
+            style, favicon_base64, ' - ' + COLLECTOR_PROFILE, ' - ' + COLLECTOR_PROFILE)
         for obj in obj_list:
             color_row = ''
             if i % 2:

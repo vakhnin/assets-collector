@@ -9,11 +9,11 @@ TOP_HTML = '''<!doctype html>
         {}
     </style>
     <link type="image/x-icon" rel="shortcut icon" href="data:image/ico;base64,{}">
-    <title>LinePoets works</title>
+    <title>LinePoets works{}</title>
 </head>
 <body>    
 
-    <h1>LinePoets works</h1>
+    <h1>LinePoets works{}</h1>
 
     <table>
         <tr>
