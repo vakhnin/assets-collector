@@ -29,7 +29,7 @@ class EpsObj:
             im.thumbnail(THUMBNAILSIZE)
 
             img_byte_arr = io.BytesIO()
-            im.save(img_byte_arr, format='GIF')
+            im.save(img_byte_arr, format='JPEG')
             img_byte_arr = img_byte_arr.getvalue()
 
             thumbnail_dict[self.name] = base64.b64encode(img_byte_arr).decode('ascii')
