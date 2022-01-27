@@ -6,7 +6,7 @@ TOPHTML = '''<!doctype html>
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">    
     <link rel="stylesheet" href="../html/ac.css">
-    <link type="image/x-icon" rel="shortcut icon" href="favicon.ico">
+    <link type="image/x-icon" rel="shortcut icon" href="data:image/ico;base64,{}">
     <title>LinePoets works</title>
 </head>
 <body>    

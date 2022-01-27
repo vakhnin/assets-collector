@@ -39,11 +39,16 @@ def make_html(obj_list):
     names_list = []
     obj_list = sorted(obj_list, key=lambda x: x.create_date)
 
-    shutil.copy(FAVICON_PATH, PATHFORSAVE / 'favicon.ico')
+    with Image.open(FAVICON_PATH) as favicon:
+        img_byte_arr = io.BytesIO()
+        favicon.save(img_byte_arr, format='ICO')
+        img_byte_arr = img_byte_arr.getvalue()
+
+        favicon_base64 = base64.b64encode(img_byte_arr).decode('ascii')
 
     with PATHFORSAVE / 'ac.html' as file:
         i = 0
-        content = TOPHTML
+        content = TOPHTML.format(favicon_base64)
         for obj in obj_list:
             color_row = ''
             if i % 2:
