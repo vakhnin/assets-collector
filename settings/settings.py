@@ -1,12 +1,15 @@
 import pathlib
 
-PATHFORSAVE = pathlib.Path('result/')
+PATH_FOR_SAVE = pathlib.Path('result/')
 
-INCLUDEDIRS = [
+COLLECTOR_PROFILE = 'Shutter'
+COLLECTOR_PROFILE = 'FunctionsSet'
+
+INCLUDE_DIRS = [
     'Shutter'
 ]
 
-EXCLUDEDIRS = [
+EXCLUDE_DIRS = [
     'source',
     'Release',
     'iStock',
@@ -14,13 +17,20 @@ EXCLUDEDIRS = [
     '(other)',
 ]
 
-ASSETSROOTDIRS = [
-    # pathlib.Path(r'd:\Google Диск\LinePoets\Works\(A-F)'),
-    # pathlib.Path(r'd:\Google Диск\LinePoets\Works\(G-M)'),
-    # pathlib.Path(r'd:\Google Диск\LinePoets\Works\(O-S)'),
+ASSETS_ROOT_DIRS = [
+    pathlib.Path(r'd:\Google Диск\LinePoets\Works\(A-F)'),
+    pathlib.Path(r'd:\Google Диск\LinePoets\Works\(G-M)'),
+    pathlib.Path(r'd:\Google Диск\LinePoets\Works\(O-S)'),
     pathlib.Path(r'd:\Google Диск\LinePoets\Works\(T-Z)'),
 ]
 
+if COLLECTOR_PROFILE == 'FunctionsSet':
+    ASSETS_ROOT_DIRS = [
+        pathlib.Path(r'd:\Google Диск\LinePoets\Works\FunctionsSet'),
+    ]
+
+STYLE_PATH = pathlib.Path.cwd() / 'html' / 'ac.css'
+
 FAVICON_PATH = pathlib.Path.cwd() / 'html' / 'img' / 'favicon.ico'
 
-THUMBNAILSIZE = 200, 200
+THUMBNAIL_SIZE = 200, 200
