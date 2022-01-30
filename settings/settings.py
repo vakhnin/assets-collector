@@ -3,6 +3,7 @@ import pathlib
 PATH_FOR_SAVE = pathlib.Path('result/')
 
 COLLECTOR_PROFILE = 'Shutter'
+COLLECTOR_PROFILE = 'FunctionsSet'
 
 INCLUDE_DIRS = [
     'Shutter'
@@ -22,6 +23,11 @@ ASSETS_ROOT_DIRS = [
     pathlib.Path(r'd:\Google Диск\LinePoets\Works\(O-S)'),
     pathlib.Path(r'd:\Google Диск\LinePoets\Works\(T-Z)'),
 ]
+
+if COLLECTOR_PROFILE == 'FunctionsSet':
+    ASSETS_ROOT_DIRS = [
+        pathlib.Path(r'd:\Google Диск\LinePoets\Works\FunctionsSet'),
+    ]
 
 STYLE_PATH = pathlib.Path.cwd() / 'html' / 'ac.css'
 
